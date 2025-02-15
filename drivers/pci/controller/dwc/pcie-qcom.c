@@ -31,6 +31,7 @@
 #include <linux/slab.h>
 #include <linux/types.h>
 #include <soc/qcom/cmd-db.h>
+#include <linux/notifier.h>
 
 #include "../../pci.h"
 #include "pcie-designware.h"
@@ -1229,6 +1230,10 @@ static int qcom_pcie_host_init(struct dw_pcie_rp *pp)
 	}
 
 	qcom_ep_reset_deassert(pcie);
+
+	//usleep_range(PERST_DELAY_US, PERST_DELAY_US + 500);
+	//qps615_notifier_call_chain(0, NULL);
+	//msleep(20);
 
 	if (pcie->cfg->ops->config_sid) {
 		ret = pcie->cfg->ops->config_sid(pcie);
